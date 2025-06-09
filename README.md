@@ -1,6 +1,4 @@
-# Oligo-Barcode-Profiler
-
-## 🧬 Oligo-Barcode-Profiler
+# 🧬 Oligo-Barcode-Profiler
 
 **Oligo-Barcode-Profiler** is a Python-based tool designed to analyze barcoded oligonucleotide libraries from paired-end Illumina sequencing data. In such libraries, each oligonucleotide is tagged with a short, random barcode — typically 8–12 bases long — that uniquely identifies the molecule or the plasmid it originated from. These barcodes are used to track individual molecules, quantify amplification biases, or group sequencing reads from the same original DNA source.
 
