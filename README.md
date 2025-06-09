@@ -110,14 +110,6 @@ Test suite includes:
 
 ---
 
-## 🔭 Stretch goals
-
-- Quality score-based filtering (Phred score thresholds)
-- Batch mode for analyzing multiple samples
-- Web-based report visualization (via Dash)
-
----
-
 ## 📚 Attribution
 
 This project was developed as part of the [Python Programming course](https://github.com/Code-Maven/wis-python-course-2025-03) at [Weizmann School of Science](https://www.weizmann.ac.il/pages/).
