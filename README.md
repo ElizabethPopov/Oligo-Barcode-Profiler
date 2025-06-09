@@ -1,10 +1,10 @@
 # 🧬 Oligo-Barcode-Profiler
 
-**Oligo-Barcode-Profiler** is a Python-based tool designed to analyze barcoded oligonucleotide libraries from paired-end Illumina sequencing data. In such libraries, each oligonucleotide is tagged with a short, random barcode — typically 8–12 bases long — that uniquely identifies the molecule or the plasmid it originated from. These barcodes are used to track individual molecules, quantify amplification biases, or group sequencing reads from the same original DNA source.
+**Oligo-Barcode-Profiler** is a Python-based tool designed to analyze barcoded oligonucleotide libraries from paired-end Illumina sequencing data. In such libraries, each oligonucleotide is tagged with a short, random barcode - typically 8–12 bases long - that uniquely identifies the molecule or the plasmid it originated from. These barcodes are used to track individual molecules, quantify amplification biases, or group sequencing reads from the same original DNA source.
 
-Following each barcode is a short sequence context, often designed to test the effect of local sequence environment on specific biochemical events — such as nucleotide modifications or repair. This tool focuses on quantifying nucleotide edits, such as **U→C correction events**, by extracting the barcode and a surrounding 3-base context from millions of sequencing reads and comparing forward and reverse read pairs to validate true edits.
+Following each barcode is a short sequence context, often designed to test the effect of local sequence environment on specific biochemical events - such as nucleotide modifications or repair. This tool focuses on quantifying nucleotide edits, such as **U→C correction events**, by extracting the barcode and a surrounding 3-base context from millions of sequencing reads and comparing forward and reverse read pairs to validate true edits.
 
-This project was developed to support research involving **targeted DNA/RNA modification analysis** and **sequence context-dependent mutation profiling**, such as those used in synthetic biology, CRISPR base editing studies, or error-correction modeling in oligo libraries.
+This project was developed to support research involving **sequence context-dependent mutation profiling**, such as those used in error-correction modeling in oligo libraries.
 
 ---
 
