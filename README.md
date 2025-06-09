@@ -79,7 +79,7 @@ python analyze_barcodes.py \
 
 **Note:**
 - The program will search for reads containing the pattern:  
-  `[anchor1][barcode][anchor2][context][anchor3]`.
+  `[anchor1][barcode][anchor2][context][anchor3]`
 - For example, with `--anchor1 AGCTTG`, `--anchor2 TAG` and `--anchor3 CUTGGTC`, the tool expects:
   - A 9-bp barcode immediately after `AGCTTG`
   - Followed by the anchor sequence `TAG`
