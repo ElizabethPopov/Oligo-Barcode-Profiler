@@ -50,7 +50,7 @@ This project was developed to support research involving **sequence context-depe
 You will need Python 3.8+ and a few bioinformatics/data science packages:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/Oligo-Barcode-Profiler.git
+git clone https://github.com/ElizabethPopov/Oligo-Barcode-Profiler.git
 cd Oligo-Barcode-Profiler
 pip install -r requirements.txt
 ```
