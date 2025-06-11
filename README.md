@@ -30,7 +30,7 @@ This project was developed to support research involving **sequence context-depe
   - Barcode length (e.g., 9 bp)
   - Context length (e.g., 3 bp)
   - Expected base (e.g., `U`) at position 2 of the 3-bp context
-- (Optional) Quality control via FastQC
+- Note: This tool expects input FASTQ files to be pre-processed, including quality control (QC), adapter trimming, and read filtering if needed. Both files in each pair (R1 and R2) must contain matching, synchronized reads.
 
 ---
 
