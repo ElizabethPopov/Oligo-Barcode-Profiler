@@ -70,11 +70,11 @@ python analyze_barcodes.py \
   --r1 sample_R1.fastq.gz \
   --r2 sample_R2.fastq.gz \
   --anchor1 AGCTTG \
+  --anchor2 TAG \
+  --anchor3 CUTGGTC \
   --anch1-mm 2 \
   --anch2-mm 1 \
   --anch3-mm 2 \
-  --anchor2 TAG \
-  --anchor3 CUTGGTC \
   --expected-base U \
   --barcode-length 9 \
   --context-length 3 \
