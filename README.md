@@ -26,7 +26,8 @@ This project was developed to support research involving **sequence context-depe
 
 - Paired-end FASTQ files (`sample_R1.fastq(.gz)`, `sample_R2.fastq(.gz)`)
 - Parameters:
-  - Known anchor sequences
+  - Known anchor sequences (anchor1, anchor2, anchor3)
+  - Allowed number of mismatches per anchor (--anch1-mm, --anch2-mm, --anch3-mm, default = 1 if not specified)
   - Barcode length (e.g., 9 bp)
   - Context length (e.g., 3 bp)
   - Expected base (e.g., `U`) at position 2 of the 3-bp context
@@ -69,6 +70,9 @@ python analyze_barcodes.py \
   --r1 sample_R1.fastq.gz \
   --r2 sample_R2.fastq.gz \
   --anchor1 AGCTTG \
+  --anch1-mm 2 \
+  --anch2-mm 1 \
+  --anch3-mm 2 \
   --anchor2 TAG \
   --anchor3 CUTGGTC \
   --expected-base U \
@@ -85,6 +89,7 @@ python analyze_barcodes.py \
   - Followed by the anchor sequence `TAG`
   - Then a 3-bp context (e.g., AUG)
   - Finally, the anchor sequence `CUTGGTC` appears immediately after the context
+  - In this example, anchor1 and anchor3 allow up to 2 mismatches, while anchor2 allows only 1 mismatch. These thresholds can be adjusted to match your data quality and tolerance.
 - The middle base of the context (position 2) is compared to the expected base (`U`) to detect conversions (e.g., U→C).
 
 ---
