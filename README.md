@@ -103,6 +103,11 @@ python analyze_barcodes.py \
   - In this example, anchor1 and anchor3 allow up to 2 mismatches, while anchor2 allows only 1 mismatch. These thresholds can be adjusted to match your data quality and tolerance.
 - The original context (uncorrected) and the corrected context (`CCA`) are calculated to detect correction rates (in this example, U→C correction).
 
+### Average runtime
+
+On a typical modern laptop (e.g., Apple M1 Pro), analyzing one sample with ~3 million read pairs takes approximately **77–100 seconds**.  
+Actual runtime may vary depending on read file size, the complexity of the search pattern, disk speed, and CPU performance.
+
 ---
 
 ## ✅ Example use case
