@@ -143,6 +143,7 @@ python analyze_barcodes.py \
   --context-length 3 \
   --output-dir test_outputs/ \
   --verbose
+```
 
 Output files will appear in test_outputs/, including:
 - example_barcode_count_summary_unfiltered.csv
