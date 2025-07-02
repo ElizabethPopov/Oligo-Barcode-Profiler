@@ -115,6 +115,44 @@ Actual runtime may vary depending on read file size, the complexity of the searc
 You have 24 plasmid samples containing 9-bp barcoded oligos with a U at the center of a 3-bp context. This tool helps you determine how frequently that U was corrected to C by searching for contexts that contain T, and whether that frequency depends on the surrounding sequence.
 
 ---
+## 🚀 Quick Start: Try It Out with Example Data
+
+This repository includes a small synthetic dataset (`example_R1.fastq`, `example_R2.fastq`) to help you test the tool immediately without needing large FASTQ files.
+
+### 🔧 Step-by-step:
+
+```bash
+# Clone the repository
+git clone https://github.com/ElizabethPopov/Oligo-Barcode-Profiler.git
+cd Oligo-Barcode-Profiler
+
+# Install required packages
+pip install -r requirements.txt
+
+# Run the pipeline on example data
+python analyze_barcodes.py \
+  --r1 data/example_R1.fastq \
+  --r2 data/example_R2.fastq \
+  --min-pct 40 \
+  --context CTA \
+  --corrected-context CCA \
+  --anchor1 CGTAC \
+  --anchor2 TTCGA \
+  --anchor3 GGACATT \
+  --barcode-length 9 \
+  --context-length 3 \
+  --output-dir test_outputs/ \
+  --verbose
+
+Output files will appear in test_outputs/, including:
+- example_barcode_count_summary_unfiltered.csv
+- example_barcode_count_summary_validated.csv
+- example_context_distribution_percent.csv
+- example_correction_summary.csv
+- example_barcode_count_distribution.png
+- example_correction_summary.png
+
+---
 
 ## 🧪 Tests
 Run all tests with:
