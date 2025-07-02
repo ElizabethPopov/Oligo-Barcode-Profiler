@@ -13,7 +13,7 @@ This project was developed to support research involving **sequence context-depe
 - Parses uncompressed paired-end FASTQ files.
 - Extracts 9 bp random barcodes followed by a 3 bp sequence (where the middle base is the original base of interest, e.g., T for U→C correction).
 - Compares forward and reverse reads to validate base calls.
-- Identifies base corrections (e.g., U→C) based on sequence context
+- Identifies base corrections (e.g., U→C) based on sequence context.
 - Groups reads by barcode and aggregates per-context mutation frequencies.
 - Outputs:
   - Summary tables as CSV files (barcode and context counts before and after filtering, context distribution, correction rates)
