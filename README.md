@@ -10,37 +10,41 @@ This project was developed to support research involving **sequence context-depe
 
 ## 💡 What does this project do?
 
-- Parses compressed or uncompressed paired-end FASTQ files.
-- Extracts 9 bp random barcodes followed by a 3 bp sequence (where the middle base is the expected base, e.g., U).
+- Parses uncompressed paired-end FASTQ files.
+- Extracts 9 bp random barcodes followed by a 3 bp sequence (where the middle base is the original base of interest, e.g., T for U→C correction).
 - Compares forward and reverse reads to validate base calls.
-- Identifies base conversions (and optionally other mutations).
+- Identifies base corrections (e.g., U→C) based on sequence context
 - Groups reads by barcode and aggregates per-context mutation frequencies.
 - Outputs:
-  - Mutation summary tables as CSV files
-  - Plots (mutation rates, barcode abundance, context bias)
-  - Optional interactive HTML report for exploring results visually
+  - Summary tables as CSV files (barcode and context counts before and after filtering, context distribution, correction rates)
+  - Plots (barcode count distribution, correction vs. no-correction rates)
 
 ---
 
 ## 📥 Input
 
-- Paired-end FASTQ files (`sample_R1.fastq(.gz)`, `sample_R2.fastq(.gz)`)
+- Paired-end FASTQ files (`sample1_R1.fastq(.fq)`, `sample1_R2.fastq(.fq)`)
 - Parameters:
-  - Known anchor sequences (anchor1, anchor2, anchor3)
-  - Allowed number of mismatches per anchor (--anch1-mm, --anch2-mm, --anch3-mm, default = 1 if not specified)
-  - Barcode length (e.g., 9 bp)
-  - Context length (e.g., 3 bp)
-  - Expected base (e.g., `U`) at position 2 of the 3-bp context
+  - Known anchor sequences (--anchor1, --anchor2, --anchor3)
+  - Original context before the correction event (--context)
+  - Corrected context (--corrected-context)
+  - Allowed number of mismatches per anchor (--anch1-mm, --anch2-mm, --anch3-mm, default = 2, 1, 2 respectively if not specified)
+  - Minimum percent for context validation (--min-pct, default = 40 if not specified)
+  - Barcode length (--barcode-length, default = 9 bp if not specified)
+  - Context length (--context-length, default = 3 bp if not specified)
+  - Directory to store output files (--output-dir)
 - Note: This tool expects input FASTQ files to be pre-processed, including quality control (QC), adapter trimming, and read filtering if needed. Both files in each pair (R1 and R2) must contain matching, synchronized reads.
 
 ---
 
 ## 📤 Output
-
-- `mutation_summary.csv`: Per-barcode mutation stats
-- `context_profile.csv`: Aggregated mutation frequency by 3-bp context
-- `mutation_plots/`: PDF or PNG plots of mutation patterns
-- `report.html`: Optional interactive dashboard with Plotly or Dash
+Output files are saved to the directory specified by `--output-dir`, and include:
+- `<sample>_barcode_count_summary_unfiltered.csv`: Raw counts per barcode after paired-read validation
+- `<sample>_barcode_count_distribution.png`: Plot of barcode count distribution
+- `<sample>_barcode_count_summary_validated.csv`: Barcode counts after filtering for high-confidence context assignments (based on --min-pct)
+- `<sample>_context_distribution_percent.csv`: Aggregated context distribution
+- `<sample>_correction_summary.csv`: Context correction statistics
+- `<sample>_correction_summary.png`: Barplot of corrected vs. uncorrected contexts
 
 ---
 
@@ -59,57 +63,64 @@ pip install -r requirements.txt
 **Dependencies:**
 - Biopython
 - pandas
-- matplotlib / seaborn
-- plotly (optional)
-- gzip (for fastq.gz handling)
+- regex
+- matplotlib
+- seaborn
+- pytest (for tests only)
 
 ### How to run
 
 ```bash
 python analyze_barcodes.py \
-  --r1 sample_R1.fastq.gz \
-  --r2 sample_R2.fastq.gz \
-  --anchor1 AGCTTG \
-  --anchor2 TAG \
-  --anchor3 CUTGGTC \
-  --anch1-mm 2 \
-  --anch2-mm 1 \
-  --anch3-mm 2 \
-  --expected-base U \
-  --barcode-length 9 \
-  --context-length 3 \
+  --r1 sample1_R1.fastq \
+  --r2 sample1_R2.fastq \
+  --min-pct 40 \
+  --context CTA \
+  --corrected-context CCA \
+  --anchor1 CGTAC \
+  --anchor2 TTCGA \
+  --anchor3 GGACATT \
+  --anch1-mm 2 \            # default
+  --anch2-mm 1 \            # default
+  --anch3-mm 2 \            # default
+  --barcode-length 9 \      # default
+  --context-length 3 \      # default
   --output-dir results/
 ```
 
 **Note:**
+- Only uncompressed `.fastq` or `.fq` files are supported currently.
 - The program will search for reads containing the pattern:  
   `[anchor1][barcode][anchor2][context][anchor3]`
-- For example, with `--anchor1 AGCTTG`, `--anchor2 TAG` and `--anchor3 CUTGGTC`, the tool expects:
-  - A 9-bp barcode immediately after `AGCTTG`
-  - Followed by the anchor sequence `TAG`
-  - Then a 3-bp context (e.g., AUG)
-  - Finally, the anchor sequence `CUTGGTC` appears immediately after the context
+- For example, with `--anchor1 CGTAC`, `--anchor2 TTCGA` and `--anchor3 GGACATT`, the tool expects:
+  - A 9-bp barcode immediately after `CGTAC`
+  - Followed by the anchor sequence `TTCGA`
+  - Then a 3-bp context (e.g., CTA)
+  - Finally, the anchor sequence `GGACATT` appears immediately after the context
   - In this example, anchor1 and anchor3 allow up to 2 mismatches, while anchor2 allows only 1 mismatch. These thresholds can be adjusted to match your data quality and tolerance.
-- The middle base of the context (position 2) is compared to the expected base (`U`) to detect conversions (e.g., U→C).
+- The original context (uncorrected) and the corrected context (`CCA`) are calculated to detect correction rates (in this example, U→C correction).
 
 ---
 
 ## ✅ Example use case
 
-You have 24 plasmid samples containing 9-bp barcoded oligos with a U at the center of a 3-bp context. This tool helps you determine how frequently that U was corrected to C, and whether that frequency depends on the surrounding sequence.
+You have 24 plasmid samples containing 9-bp barcoded oligos with a U at the center of a 3-bp context. This tool helps you determine how frequently that U was corrected to C by searching for contexts that contain T, and whether that frequency depends on the surrounding sequence.
 
 ---
 
 ## 🧪 Tests
-
+Run all tests with:
 ```bash
 pytest tests/
 ```
 
 Test suite includes:
-- Synthetic read parsing
-- Barcode and context extraction
-- Mutation frequency calculations
+- Validation of barcode and context extraction from R1 and R2 reads
+- Read parsing and FASTQ structural checks
+- Anchor mismatch handling
+- Summary statistics and correction events calculations
+- Exception handling (e.g., malformed reads, missing files, invalid input parameters)
+- Visual output generation (barcode and correction summary plots tested for successful creation)
 
 ---
 
