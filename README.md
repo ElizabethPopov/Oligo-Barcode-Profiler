@@ -41,6 +41,7 @@ This project was developed to support research involving **sequence context-depe
 ---
 
 ## 📤 Output
+
 Output files are saved to the directory specified by `--output-dir`, and include:
 - `<sample>_barcode_count_summary_unfiltered.csv`: Raw counts per barcode after paired-read validation
 - `<sample>_barcode_count_distribution.png`: Plot of barcode count distribution
@@ -115,6 +116,7 @@ Actual runtime may vary depending on read file size, the complexity of the searc
 You have 24 plasmid samples containing 9-bp barcoded oligos with a U at the center of a 3-bp context. This tool helps you determine how frequently that U was corrected to C by searching for contexts that contain T, and whether that frequency depends on the surrounding sequence.
 
 ---
+
 ## 🚀 Quick Start: Try It Out with Example Data
 
 This repository includes a small synthetic dataset (`example_R1.fastq`, `example_R2.fastq`) to help you test the tool immediately without needing large FASTQ files.
@@ -156,6 +158,7 @@ Output files will appear in test_outputs/, including:
 ---
 
 ## 🧪 Tests
+
 Run all tests with:
 ```bash
 pytest tests/
@@ -168,6 +171,19 @@ Test suite includes:
 - Summary statistics and correction events calculations
 - Exception handling (e.g., malformed reads, missing files, invalid input parameters)
 - Visual output generation (barcode and correction summary plots tested for successful creation)
+
+---
+
+## 📊 Real Example Output
+To demonstrate full pipeline output, I have include processed files generated from a ~3M read-pair sample:
+- example_outputs/S1_amp_S1_barcode_count_summary_unfiltered.csv
+- example_outputs/S1_amp_S1_barcode_count_summary_validated.csv
+- example_outputs/S1_amp_S1_context_distribution_percent.csv
+- example_outputs/S1_amp_S1_correction_summary.csv
+- example_outputs/S1_amp_S1_correction_summary.png
+- example_outputs/S1_amp_S1_barcode_count_distribution.png
+
+These reflect real correction and context distribution statistics from an experimental library. You can use them to compare your results or understand output structure.
 
 ---
 
