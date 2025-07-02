@@ -25,15 +25,18 @@ This project was developed to support research involving **sequence context-depe
 
 - Paired-end FASTQ files (`sample1_R1.fastq(.fq)`, `sample1_R2.fastq(.fq)`)
 - Parameters:
-  - Known anchor sequences (--anchor1, --anchor2, --anchor3)
-  - Original context before the correction event (--context)
-  - Corrected context (--corrected-context)
-  - Allowed number of mismatches per anchor (--anch1-mm, --anch2-mm, --anch3-mm, default = 2, 1, 2 respectively if not specified)
-  - Minimum percent for context validation (--min-pct, default = 40 if not specified)
-  - Barcode length (--barcode-length, default = 9 bp if not specified)
-  - Context length (--context-length, default = 3 bp if not specified)
-  - Directory to store output files (--output-dir)
-- Note: This tool expects input FASTQ files to be pre-processed, including quality control (QC), adapter trimming, and read filtering if needed. Both files in each pair (R1 and R2) must contain matching, synchronized reads.
+  - Known anchor sequences (`--anchor1`, `--anchor2`, `--anchor3`)
+  - Original context before the correction event (`--context`)
+  - Corrected context (`--corrected-context`)
+  - Allowed number of mismatches per anchor  
+    (`--anch1-mm`, `--anch2-mm`, `--anch3-mm`; defaults: 2, 1, 2)
+  - Minimum percent for context validation  
+    (`--min-pct`; default: 40%)
+  - Barcode length (`--barcode-length`; default: 9 bp)
+  - Context length (`--context-length`; default: 3 bp)
+  - Output directory for saving results (`--output-dir`)
+- **Note:** This tool expects input FASTQ files to be pre-processed (e.g., adapter trimming, QC, filtering).  
+  R1 and R2 files must contain **synchronized read pairs**.
 
 ---
 
