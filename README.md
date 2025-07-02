@@ -34,7 +34,7 @@ This project was developed to support research involving **sequence context-depe
     (`--min-pct`; default: 40%)
   - Barcode length (`--barcode-length`; default: 9 bp)
   - Context length (`--context-length`; default: 3 bp)
-  - Output directory for saving results (`--output-dir`)
+  - Output directory for saving results (`--output-dir`; default: output)
 - **Note:** This tool expects input FASTQ files to be pre-processed (e.g., adapter trimming, QC, filtering).  
   R1 and R2 files must contain **synchronized read pairs**.
 
@@ -88,7 +88,7 @@ python analyze_barcodes.py \
   --anch3-mm 2 \            # default
   --barcode-length 9 \      # default
   --context-length 3 \      # default
-  --output-dir results/
+  --output-dir output/      # default
 ```
 
 **Note:**
