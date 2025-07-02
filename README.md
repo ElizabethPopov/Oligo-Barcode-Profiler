@@ -148,12 +148,12 @@ python analyze_barcodes.py \
 ```
 
 Output files will appear in test_outputs/, including:
-- example_barcode_count_summary_unfiltered.csv
-- example_barcode_count_summary_validated.csv
-- example_context_distribution_percent.csv
-- example_correction_summary.csv
-- example_barcode_count_distribution.png
-- example_correction_summary.png
+- `example_barcode_count_summary_unfiltered.csv`
+- `example_barcode_count_summary_validated.csv`
+- `example_context_distribution_percent.csv`
+- `example_correction_summary.csv`
+- `example_barcode_count_distribution.png`
+- `example_correction_summary.png`
 
 ---
 
@@ -176,12 +176,12 @@ Test suite includes:
 
 ## 📊 Real Example Output
 To demonstrate full pipeline output, I have include processed files generated from a ~3M read-pair sample:
-- example_outputs/S1_amp_S1_barcode_count_summary_unfiltered.csv
-- example_outputs/S1_amp_S1_barcode_count_summary_validated.csv
-- example_outputs/S1_amp_S1_context_distribution_percent.csv
-- example_outputs/S1_amp_S1_correction_summary.csv
-- example_outputs/S1_amp_S1_correction_summary.png
-- example_outputs/S1_amp_S1_barcode_count_distribution.png
+- `example_outputs/S1_amp_S1_barcode_count_summary_unfiltered.csv`
+- `example_outputs/S1_amp_S1_barcode_count_summary_validated.csv`
+- `example_outputs/S1_amp_S1_context_distribution_percent.csv`
+- `example_outputs/S1_amp_S1_correction_summary.csv`
+- `example_outputs/S1_amp_S1_correction_summary.png`
+- `example_outputs/S1_amp_S1_barcode_count_distribution.png`
 
 These reflect real correction and context distribution statistics from an experimental library. You can use them to compare your results or understand output structure.
 
