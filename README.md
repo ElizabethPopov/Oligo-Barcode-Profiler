@@ -182,6 +182,7 @@ To demonstrate real-world results, the `real_data_outputs/` folder includes outp
 - `real_data_outputs/S1_amp_S1_correction_summary.csv`
 - `real_data_outputs/S1_amp_S1_correction_summary.png`
 - `real_data_outputs/S1_amp_S1_barcode_count_distribution.png`
+
 These reflect actual correction and context distribution statistics from an experimental oligo library. You can use them to:
 - Compare results against your own data
 - Explore the output format and file structure
