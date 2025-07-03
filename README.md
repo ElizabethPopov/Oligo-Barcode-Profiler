@@ -149,7 +149,7 @@ python analyze_barcodes.py \
   --verbose
 ```
 
-Output files will appear in test_outputs/, including:
+Output files will appear in `output/`, including:
 - `example_barcode_count_summary_unfiltered.csv`
 - `example_barcode_count_summary_validated.csv`
 - `example_context_distribution_percent.csv`
