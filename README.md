@@ -54,6 +54,11 @@ Output files are saved to the directory specified by `--output-dir`, and include
 
 ## ⚙️ Technical details
 
+### Average runtime
+
+On a typical modern laptop (e.g., Apple M1 Pro), analyzing one sample with ~3 million read pairs takes approximately **77–100 seconds**.  
+Actual runtime may vary depending on read file size, the complexity of the search pattern, disk speed, and CPU performance.
+
 ### How to install
 
 You will need Python 3.8+ and a few bioinformatics/data science packages:
@@ -92,7 +97,7 @@ python analyze_barcodes.py \
   --output-dir output/      # default
 ```
 
-**Note:**
+**Notes:**
 - Only uncompressed `.fastq` or `.fq` files are supported currently.
 - The program will search for reads containing the pattern:  
   `[anchor1][barcode][anchor2][context][anchor3]`
@@ -104,10 +109,7 @@ python analyze_barcodes.py \
   - In this example, anchor1 and anchor3 allow up to 2 mismatches, while anchor2 allows only 1 mismatch. These thresholds can be adjusted to match your data quality and tolerance.
 - The original context (uncorrected) and the corrected context (`CCA`) are calculated to detect correction rates (in this example, U→C correction).
 
-### Average runtime
-
-On a typical modern laptop (e.g., Apple M1 Pro), analyzing one sample with ~3 million read pairs takes approximately **77–100 seconds**.  
-Actual runtime may vary depending on read file size, the complexity of the search pattern, disk speed, and CPU performance.
+💡 Note: Running the pipeline with the same `--output-dir` will overwrite existing output files.
 
 ---
 
@@ -143,7 +145,7 @@ python analyze_barcodes.py \
   --anchor3 GGACATT \
   --barcode-length 9 \
   --context-length 3 \
-  --output-dir test_outputs/ \
+  --output-dir output/ \
   --verbose
 ```
 
@@ -186,10 +188,10 @@ These reflect actual correction and context distribution statistics from an expe
 
 **Note:**
 I did **not** include the following files due to their large size:
-- `example_outputs/S1_amp_S1_barcode_count_summary_unfiltered.csv`
-- `example_outputs/S1_amp_S1_barcode_count_summary_validated.csv`
+- `S1_amp_S1_barcode_count_summary_unfiltered.csv`
+- `S1_amp_S1_barcode_count_summary_validated.csv`
 
-The included files should still be sufficient to give you a solid understanding of the output. 
+These files should be sufficient to give you a clear understanding of the output structure. 
 
 ---
 
@@ -206,20 +208,6 @@ Included example files:
 - `example_correction_summary.png`
 
 These outputs were generated from a lightweight synthetic dataset designed for testing.
-
-You can reproduce them by running:
-```bash
-python analyze_barcodes.py \
-  --r1 data/example_R1.fastq \
-  --r2 data/example_R2.fastq \
-  --min-pct 40 \
-  --context CTA \
-  --corrected-context CCA \
-  --anchor1 CGTAC \
-  --anchor2 TTCGA \
-  --anchor3 GGACATT \
-  --output-dir example_outputs/
-```
 
 ---
 
