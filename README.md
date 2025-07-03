@@ -88,6 +88,7 @@ Oligo-Barcode-Profiler/
 │   └── test_fastq_reader.py
 │   └── test_barcode_parser.py
 │   └── ...
+│
 ├── output/                        # Output directory (created dynamically, git-ignored)
 │
 ├── example_outputs/               # Committed outputs from example dataset
