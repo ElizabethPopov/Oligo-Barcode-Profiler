@@ -24,19 +24,8 @@ This project was developed to support research involving **sequence context-depe
 ## 📥 Input
 
 - Paired-end FASTQ files (`sample1_R1.fastq(.fq)`, `sample1_R2.fastq(.fq)`)
-- Parameters:
-  - Known anchor sequences (`--anchor1`, `--anchor2`, `--anchor3`)
-  - Original context before the correction event (`--context`)
-  - Corrected context (`--corrected-context`)
-  - Allowed number of mismatches per anchor  
-    (`--anch1-mm`, `--anch2-mm`, `--anch3-mm`; defaults: 2, 1, 2)
-  - Minimum percent for context validation  
-    (`--min-pct`; default: 40%)
-  - Barcode length (`--barcode-length`; default: 9 bp)
-  - Context length (`--context-length`; default: 3 bp)
-  - Output directory for saving results (`--output-dir`; default: output)
-- **Note:** This tool expects input FASTQ files to be pre-processed (e.g., adapter trimming, QC, filtering).  
-  R1 and R2 files must contain **synchronized read pairs**.
+**Note:** This tool expects input FASTQ files to be uncompressed and pre-processed (e.g., adapter trimming, QC, filtering).  
+R1 and R2 files must contain **synchronized read pairs**.
 
 ---
 
@@ -77,6 +66,35 @@ pip install -r requirements.txt
 - seaborn
 - pytest (for tests only)
 
+### 📁 Project Structure
+
+```bash
+Oligo-Barcode-Profiler/
+├── analyze_barcodes.py            # Main CLI script to run the pipeline
+├── barcode_parser.py              # Functions for regex pattern compilation and barcode/context extraction
+├── fastq_reader.py                # FASTQ parsing and paired-end read processing
+├── mutation_analyzer.py           # Context correction validation and mutation stats
+├── summary_builder.py             # Aggregates data into barcode/context summaries
+├── visualizer.py                  # Plotting and visual summaries
+├── requirements.txt               # Python package dependencies
+├── README.md                      # Project documentation
+├── .gitignore                     # Files and folders excluded from git tracking
+│
+├── data/                          # Example FASTQ input files
+│   └── example_R1.fastq
+│   └── example_R2.fastq
+│
+├── tests/                         # Pytest-based unit tests
+│   └── test_fastq_reader.py
+│   └── test_barcode_parser.py
+│   └── ...
+├── output/                        # Output directory (created dynamically, git-ignored)
+│
+├── example_outputs/               # Committed outputs from example dataset
+│
+└── real_data_outputs/             # Committed lightweight outputs from real dataset
+```
+
 ### How to run
 
 ```bash
@@ -96,6 +114,18 @@ python analyze_barcodes.py \
   --context-length 3 \      # default
   --output-dir output/      # default
 ```
+
+**Parameters:**
+- Known anchor sequences (`--anchor1`, `--anchor2`, `--anchor3`)
+- Original context before the correction event (`--context`)
+- Corrected context (`--corrected-context`)
+- Allowed number of mismatches per anchor  
+    (`--anch1-mm`, `--anch2-mm`, `--anch3-mm`; defaults: 2, 1, 2)
+- Minimum percent for context validation  
+    (`--min-pct`; default: 40%)
+- Barcode length (`--barcode-length`; default: 9 bp)
+- Context length (`--context-length`; default: 3 bp)
+- Output directory for saving results (`--output-dir`; default: output)
 
 **Notes:**
 - Only uncompressed `.fastq` or `.fq` files are supported currently.
