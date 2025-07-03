@@ -1,0 +1,6 @@
+Biopython
+pandas
+regex
+matplotlib
+seaborn
+pytest
